@@ -1,40 +1,33 @@
-# Go Backend Starter
+# Backend
 
-A minimal backend setup using Go, Gin, GORM, PostgreSQL, JWT, and environment-based configuration.
+A Go backend starter using Gin, GORM, MySQL, JWT auth, and environment-based configuration.
 
 ## Prerequisites
 
 - Go 1.22+
-- Docker and Docker Compose
-- PostgreSQL (or use the included Docker service)
+- MySQL server running locally or available on your machine
 
 ## Setup
 
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
+1. Copy the environment example file:
 
-2. Start PostgreSQL with Docker:
-   ```bash
-   docker compose up -d postgres
-   ```
+```bash
+cp .env.example .env
+```
 
-3. Install module dependencies:
-   ```bash
-   go mod tidy
-   ```
+2. Update the values in `.env` for your local database and JWT settings.
 
-4. Run the app:
-   ```bash
-   go run ./cmd/api
-   ```
+3. Install dependencies:
 
-## Default endpoints
+```bash
+go mod tidy
+```
 
-- `GET /health` - health check
-- `GET /ping` - simple ping endpoint
-- `GET /api/protected` - authenticated route using JWT bearer token
+4. Run the backend:
+
+```bash
+go run ./cmd/api
+```
 
 ## Environment variables
 
@@ -48,7 +41,13 @@ A minimal backend setup using Go, Gin, GORM, PostgreSQL, JWT, and environment-ba
 - `JWT_SECRET`
 - `JWT_TTL_MINUTES`
 
+## Default routes
+
+- `GET /health`
+- `GET /ping`
+- `GET /api/protected`
+
 ## Notes
 
-- The project is ready to extend with controllers, services, repositories, and real JWT-auth user flows.
-- `.env` is ignored by Git to keep local secrets out of source control.
+- This project is intentionally minimal and ready for extension.
+- Local development is expected to use your own database/server setup rather than Docker-based setup files.

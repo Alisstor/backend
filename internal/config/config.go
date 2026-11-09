@@ -43,26 +43,25 @@ func Load() Config {
 
 	return Config{
 		ServerPort: serverPort,
-		DBHost:     getEnv("DB_HOST", "localhost"),
+		DBHost:     getEnv("DB_HOST", "127.0.0.1"),
 		DBPort:     dbPort,
-		DBUser:     getEnv("DB_USER", "user"),
-		DBPassword: getEnv("DB_PASSWORD", ""),
-		DBName:     getEnv("DB_NAME", "sample"),
+		DBUser:     getEnv("DB_USER", "root"),
+		DBPassword: getEnv("DB_PASSWORD", "root"),
+		DBName:     getEnv("DB_NAME", "backend_db"),
 		DBSSLMode:  getEnv("DB_SSLMODE", "disable"),
-		JWTSecret:  getEnv("JWT_SECRET", ""),
+		JWTSecret:  getEnv("JWT_SECRET", "local-dev-secret-change-me"),
 		JWTTTL:     jwtTTL,
 	}
 }
 
 func (c Config) DatabaseURL() string {
 	return fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%d sslmode=%s TimeZone=UTC",
-		c.DBHost,
+		"%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=true&loc=Local",
 		c.DBUser,
 		c.DBPassword,
-		c.DBName,
+		c.DBHost,
 		c.DBPort,
-		c.DBSSLMode,
+		c.DBName,
 	)
 }
 
